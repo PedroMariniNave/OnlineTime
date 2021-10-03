@@ -1,0 +1,7 @@
+name: OnlineTime
+description: Only a simple online time plugin.
+version: 1.0
+api-version: 1.16
+main: com.zpedroo.onlinetime.OnlineTime
+softdepend:
+  - Legendchat
