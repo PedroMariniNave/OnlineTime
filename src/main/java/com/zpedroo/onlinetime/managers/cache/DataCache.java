@@ -16,7 +16,6 @@ public class DataCache {
     public DataCache() {
         this.playerData = new HashMap<>(128);
         this.shopItems = new ArrayList<>(16);
-        this.topOnline = DBConnection.getInstance().getDBManager().getTop();
     }
 
     public Map<Player, PlayerData> getPlayerData() {
@@ -28,6 +27,10 @@ public class DataCache {
     }
 
     public List<PlayerData> getTopOnline() {
+        if (topOnline == null) {
+            this.topOnline = DBConnection.getInstance().getDBManager().getTop();
+        }
+
         return topOnline;
     }
 

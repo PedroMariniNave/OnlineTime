@@ -37,15 +37,17 @@ public class DataManager {
         return data;
     }
 
-    public void save(Player player) {
+    public void save(Player player, boolean remove) {
         PlayerData data = dataCache.getPlayerData().get(player);
         if (data == null) return;
 
         DBConnection.getInstance().getDBManager().saveData(data);
+
+        if (remove) dataCache.getPlayerData().remove(player);
     }
 
     public void saveAll() {
-        new HashSet<>(dataCache.getPlayerData().keySet()).forEach(this::save);
+        new HashSet<>(dataCache.getPlayerData().keySet()).forEach(player -> save(player, false));
     }
 
     private void loadShopItems() {
@@ -53,7 +55,7 @@ public class DataManager {
         for (String str : FileUtils.get().getSection(file, "Inventory.items")) {
             if (str == null) continue;
 
-            Long price = FileUtils.get().getLong(file, "Inventory.items." + str + ".price", 0L);
+            Long price = FileUtils.get().getLong(file, "Inventory.items." + str + ".price");
             Integer defaultAmount = FileUtils.get().getInt(file, "Inventory.items." + str + ".default-amount", 1);
             ItemStack display = ItemBuilder.build(FileUtils.get().getFile(file).get(), "Inventory.items." + str + ".display", new String[]{
                     "{price}"

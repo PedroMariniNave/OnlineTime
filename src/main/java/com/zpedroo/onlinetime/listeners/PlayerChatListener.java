@@ -27,7 +27,7 @@ public class PlayerChatListener implements Listener {
     private static HashMap<Player, PlayerChat> playerChat;
 
     static {
-        playerChat = new HashMap<>(32);
+        playerChat = new HashMap<>(8);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
@@ -38,7 +38,7 @@ public class PlayerChatListener implements Listener {
         event.setTagValue("online_time", StringUtils.replaceEach(Settings.TAG, new String[]{
                 "{level}"
         }, new String[]{
-                data.getLevel().toString()
+                NumberFormatter.getInstance().formatDecimal(data.getLevel().doubleValue())
         }));
 
         if (!getPlayerChat().containsKey(player)) return;
@@ -104,8 +104,6 @@ public class PlayerChatListener implements Listener {
         }
 
         for (String cmd : item.getCommands()) {
-            if (cmd == null) continue;
-
             final Integer finalAmount = amount;
             OnlineTime.get().getServer().getScheduler().runTaskLater(OnlineTime.get(), () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), StringUtils.replaceEach(cmd, new String[]{
                     "{player}",
@@ -130,7 +128,7 @@ public class PlayerChatListener implements Listener {
             }));
         }
 
-        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 0.5f, 100f);
+        player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 0.5f, 100f);
     }
 
     public static HashMap<Player, PlayerChat> getPlayerChat() {

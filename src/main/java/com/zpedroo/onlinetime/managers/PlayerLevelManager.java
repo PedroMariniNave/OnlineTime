@@ -20,6 +20,8 @@ public class PlayerLevelManager {
         long hourInMillis = TimeUnit.HOURS.toMillis(1L);
         float hoursOnline = (float) data.getTotalOnlineTime() / hourInMillis;
         player.setLevel((int) hoursOnline);
-        player.setExp((float) (hoursOnline - Math.floor(hoursOnline)));
+
+        float progress = (float) (hoursOnline - Math.floor(hoursOnline));
+        player.setExp(progress);
     }
 }

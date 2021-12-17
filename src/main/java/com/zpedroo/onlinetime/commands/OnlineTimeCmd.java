@@ -13,6 +13,19 @@ public class OnlineTimeCmd implements CommandExecutor {
         if (!(sender instanceof Player)) return true;
 
         Player player = (Player) sender;
+
+        if (args.length > 0) {
+            switch (args[0].toUpperCase()) {
+                case "TOP":
+                    Menus.getInstance().openTopMenu(player);
+                    return true;
+
+                case "SHOP":
+                    Menus.getInstance().openShopMenu(player);
+                    return true;
+            }
+        }
+
         Menus.getInstance().openMainMenu(player);
         return false;
     }

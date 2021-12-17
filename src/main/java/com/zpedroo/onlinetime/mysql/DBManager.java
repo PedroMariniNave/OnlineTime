@@ -14,7 +14,8 @@ public class DBManager {
                     "`uuid`='" + data.getUUID().toString() + "', " +
                     "`played_time`='" + data.getTotalOnlineTime() + "', " +
                     "`first_join`='" + data.getFirstJoinTime() + "', " +
-                    "`spent_points`='" + data.getSpentPoints() + "';";
+                    "`spent_points`='" + data.getSpentPoints() + "' " +
+                    "WHERE `uuid`='" + data.getUUID().toString() + "';";
             executeUpdate(query);
             return;
         }
@@ -56,7 +57,7 @@ public class DBManager {
     }
 
     public List<PlayerData> getTop() {
-        List<PlayerData> top = new LinkedList<>();
+        List<PlayerData> top = new ArrayList<>(10);
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -130,7 +131,7 @@ public class DBManager {
     }
 
     protected void createTable() {
-        String query = "CREATE TABLE IF NOT EXISTS `" + DBConnection.TABLE + "` (`uuid` VARCHAR(255) NOT NULL, `played_time` LONG NOT NULL, `first_join` LONG NOT NULL, `spent_points` LONG NOT NULL, PRIMARY KEY(`uuid`));";
+        String query = "CREATE TABLE IF NOT EXISTS `" + DBConnection.TABLE + "` (`uuid` VARCHAR(255), `played_time` DECIMAL(40,0), `first_join` LONG, `spent_points` LONG, PRIMARY KEY(`uuid`));";
         executeUpdate(query);
     }
 
