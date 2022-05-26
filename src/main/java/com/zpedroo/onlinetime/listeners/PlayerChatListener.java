@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PlayerChatListener implements Listener {
 
-    private static HashMap<Player, PlayerChat> playerChat;
+    private static final HashMap<Player, PlayerChat> playerChat;
 
     static {
         playerChat = new HashMap<>(8);
@@ -33,12 +33,12 @@ public class PlayerChatListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onChat(ChatMessageEvent event) {
         Player player = event.getSender();
-        PlayerData data = DataManager.getInstance().load(player);
+        PlayerData data = DataManager.getInstance().getPlayerData(player);
 
         event.setTagValue("online_time", StringUtils.replaceEach(Settings.TAG, new String[]{
                 "{level}"
         }, new String[]{
-                NumberFormatter.getInstance().formatDecimal(data.getLevel().doubleValue())
+                NumberFormatter.getInstance().formatDecimal(data.getLevel())
         }));
 
         if (!getPlayerChat().containsKey(player)) return;
@@ -137,8 +137,8 @@ public class PlayerChatListener implements Listener {
 
     public static class PlayerChat {
 
-        private Player player;
-        private ShopItem item;
+        private final Player player;
+        private final ShopItem item;
 
         public PlayerChat(Player player, ShopItem item) {
             this.player = player;

@@ -27,8 +27,8 @@ public class Menus extends InventoryUtils {
     private static Menus instance;
     public static Menus getInstance() { return instance; }
 
-    private ItemStack nextPageItem;
-    private ItemStack previousPageItem;
+    private final ItemStack nextPageItem;
+    private final ItemStack previousPageItem;
 
     public Menus() {
         instance = this;
@@ -44,7 +44,7 @@ public class Menus extends InventoryUtils {
 
         InventoryBuilder inventory = new InventoryBuilder(title, size);
 
-        PlayerData data = DataManager.getInstance().load(player);
+        PlayerData data = DataManager.getInstance().getPlayerData(player);
 
         for (String str : FileUtils.get().getSection(file, "Inventory.items")) {
             ItemStack item = ItemBuilder.build(FileUtils.get().getFile(file).get(), "Inventory.items." + str, new String[]{

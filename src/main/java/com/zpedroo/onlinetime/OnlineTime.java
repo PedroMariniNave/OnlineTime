@@ -1,6 +1,7 @@
 package com.zpedroo.onlinetime;
 
 import com.zpedroo.onlinetime.commands.OnlineTimeCmd;
+import com.zpedroo.onlinetime.hooks.PlaceholderAPIHook;
 import com.zpedroo.onlinetime.listeners.PlayerChatListener;
 import com.zpedroo.onlinetime.listeners.PlayerGeneralListeners;
 import com.zpedroo.onlinetime.managers.DataManager;
@@ -53,6 +54,10 @@ public class OnlineTime extends JavaPlugin {
         new UpdateLevelTask(this);
         new Menus();
 
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new PlaceholderAPIHook(this).register();
+        }
+
         registerCommand(COMMAND, ALIASES, new OnlineTimeCmd());
         registerListeners();
     }
@@ -61,7 +66,7 @@ public class OnlineTime extends JavaPlugin {
         if (!isMySQLEnabled(getConfig())) return;
 
         try {
-            DataManager.getInstance().saveAll();
+            DataManager.getInstance().saveAllPlayersData();
             DBConnection.getInstance().closeConnection();
         } catch (Exception ex) {
             getLogger().log(Level.SEVERE, "An error occurred while trying to save data!");

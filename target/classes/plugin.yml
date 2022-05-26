@@ -1,7 +1,8 @@
 name: OnlineTime
-description: ${project.description}
+description: Only a simple online time plugin.
 version: 1.0
 api-version: 1.8
 main: com.zpedroo.onlinetime.OnlineTime
 softdepend:
   - Legendchat
+  - PlaceholderAPI

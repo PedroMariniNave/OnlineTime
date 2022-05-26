@@ -15,7 +15,7 @@ public class PlayerLevelManager {
     }
 
     public void update(Player player) {
-        PlayerData data = DataManager.getInstance().load(player);
+        PlayerData data = DataManager.getInstance().getPlayerData(player);
 
         long hourInMillis = TimeUnit.HOURS.toMillis(1L);
         float hoursOnline = (float) data.getTotalOnlineTime() / hourInMillis;

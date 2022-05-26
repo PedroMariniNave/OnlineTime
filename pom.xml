@@ -11,6 +11,10 @@
     <name>OnlineTime</name>
     <description>Only a simple online time plugin.</description>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -46,18 +50,19 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <includes>
-                    <include>plugin.yml</include>
+                    <include>**/*.yml</include>
                 </includes>
             </resource>
 
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>false</filtering>
+                <filtering>true</filtering>
                 <excludes>
-                    <exclude>plugin.yml</exclude>
+                    <exclude>**/*.jar</exclude>
                 </excludes>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

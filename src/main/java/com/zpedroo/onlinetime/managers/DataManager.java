@@ -19,15 +19,15 @@ public class DataManager {
     private static DataManager instance;
     public static DataManager getInstance() { return instance; }
 
-    private DataCache dataCache;
+    private final DataCache dataCache;
 
     public DataManager() {
         instance = this;
         this.dataCache = new DataCache();
-        this.loadShopItems();
+        this.loadShopItemsFromConfig();
     }
 
-    public PlayerData load(Player player) {
+    public PlayerData getPlayerData(Player player) {
         PlayerData data = dataCache.getPlayerData().get(player);
         if (data == null) {
             data = DBConnection.getInstance().getDBManager().loadData(player);
@@ -37,7 +37,7 @@ public class DataManager {
         return data;
     }
 
-    public void save(Player player, boolean remove) {
+    public void savePlayerData(Player player, boolean remove) {
         PlayerData data = dataCache.getPlayerData().get(player);
         if (data == null) return;
 
@@ -46,11 +46,11 @@ public class DataManager {
         if (remove) dataCache.getPlayerData().remove(player);
     }
 
-    public void saveAll() {
-        new HashSet<>(dataCache.getPlayerData().keySet()).forEach(player -> save(player, false));
+    public void saveAllPlayersData() {
+        new HashSet<>(dataCache.getPlayerData().keySet()).forEach(player -> savePlayerData(player, false));
     }
 
-    private void loadShopItems() {
+    private void loadShopItemsFromConfig() {
         FileUtils.Files file = FileUtils.Files.SHOP;
         for (String str : FileUtils.get().getSection(file, "Inventory.items")) {
             if (str == null) continue;

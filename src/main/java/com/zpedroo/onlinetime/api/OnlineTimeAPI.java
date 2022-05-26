@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public class OnlineTimeAPI {
 
-    public static Long getLevel(Player player) {
-        return DataManager.getInstance().load(player).getLevel();
+    public static long getLevel(Player player) {
+        return DataManager.getInstance().getPlayerData(player).getLevel();
     }
 }

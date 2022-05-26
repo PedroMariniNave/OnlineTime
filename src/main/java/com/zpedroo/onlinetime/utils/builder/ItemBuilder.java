@@ -26,7 +26,7 @@ import java.util.UUID;
 
 public class ItemBuilder {
 
-    private ItemStack item;
+    private final ItemStack item;
 
     private Method metaSetProfileMethod;
     private Field metaProfileField;

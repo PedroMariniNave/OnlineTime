@@ -6,11 +6,11 @@ import java.util.List;
 
 public class ShopItem {
 
-    private Long price;
-    private Integer defaultAmount;
-    private ItemStack display;
-    private ItemStack shopItem;
-    private List<String> commands;
+    private final Long price;
+    private final Integer defaultAmount;
+    private final ItemStack display;
+    private final ItemStack shopItem;
+    private final List<String> commands;
 
     public ShopItem(Long price, Integer defaultAmount, ItemStack display, ItemStack shopItem, List<String> commands) {
         this.price = price;

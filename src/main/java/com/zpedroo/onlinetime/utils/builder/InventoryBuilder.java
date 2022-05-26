@@ -14,17 +14,17 @@ import static com.zpedroo.onlinetime.utils.builder.InventoryUtils.*;
 
 public class InventoryBuilder {
 
-    private Inventory inventory;
-    private String title;
-    private Integer size;
-    private ItemStack previousPageItem;
-    private Integer previousPageSlot;
-    private InventoryBuilder previousPageInventory;
-    private ItemStack nextPageItem;
-    private Integer nextPageSlot;
+    private final Inventory inventory;
+    private final String title;
+    private final Integer size;
+    private final ItemStack previousPageItem;
+    private final Integer previousPageSlot;
+    private final InventoryBuilder previousPageInventory;
+    private final ItemStack nextPageItem;
+    private final Integer nextPageSlot;
     private InventoryBuilder nextPageInventory;
     private Table<Integer, ItemStack, List<Action>> defaultItems;
-    private Table<Integer, ActionType, Action> actions;
+    private final Table<Integer, ActionType, Action> actions;
 
     public InventoryBuilder(String title, Integer size) {
         this(title, size, null, null, null, null, null, null);

@@ -15,7 +15,7 @@ public class SaveTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        DataManager.getInstance().saveAll();
+        DataManager.getInstance().saveAllPlayersData();
         DataManager.getInstance().getCache().setTop(DBConnection.getInstance().getDBManager().getTop());
     }
 }

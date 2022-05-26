@@ -7,13 +7,13 @@ import java.util.concurrent.TimeUnit;
 
 public class PlayerData {
 
-    private UUID uuid;
-    private Long loginTime;
-    private Long playedTime;
-    private Long firstJoinTime;
-    private Long spentPoints;
+    private final UUID uuid;
+    private long loginTime = -1;
+    private final long playedTime;
+    private final long firstJoinTime;
+    private long spentPoints;
 
-    public PlayerData(UUID uuid, Long playedTime, Long firstJoinTime, Long spentPoints) {
+    public PlayerData(UUID uuid, long playedTime, long firstJoinTime, long spentPoints) {
         this.uuid = uuid;
         this.playedTime = playedTime;
         this.firstJoinTime = firstJoinTime;
@@ -24,33 +24,33 @@ public class PlayerData {
         return uuid;
     }
 
-    public Long getLevel() {
+    public long getLevel() {
         return getTotalOnlineTime() / TimeUnit.HOURS.toMillis(1L);
     }
 
-    public Long getLoginTime() {
+    public long getLoginTime() {
         return loginTime;
     }
 
-    public Long getPlayedTime() {
+    public long getPlayedTime() {
         return playedTime;
     }
 
-    public Long getFirstJoinTime() {
+    public long getFirstJoinTime() {
         return firstJoinTime;
     }
 
-    public Long getTotalOnlineTime() {
-        if (loginTime == null) return playedTime;
+    public long getTotalOnlineTime() {
+        if (loginTime == -1) return playedTime;
 
         return playedTime + (System.currentTimeMillis() - loginTime);
     }
 
-    public Long getSpentPoints() {
+    public long getSpentPoints() {
         return spentPoints;
     }
 
-    public Long getPointsAmount() {
+    public long getPointsAmount() {
         double totalOnlineTime = (double) getTotalOnlineTime();
         double hourInMillis = (double) TimeUnit.HOURS.toMillis(1L);
         double pointsPerHour = (double) Settings.POINTS_PER_HOUR;
@@ -62,11 +62,11 @@ public class PlayerData {
         return (long) pointsAmount;
     }
 
-    public void addSpentPoints(Long spentPoints) {
+    public void addSpentPoints(long spentPoints) {
         this.spentPoints += spentPoints;
     }
 
-    public void setLoginTime(Long loginTime) {
+    public void setLoginTime(long loginTime) {
         this.loginTime = loginTime;
     }
 }

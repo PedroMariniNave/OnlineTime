@@ -16,7 +16,7 @@ public class PlayerGeneralListeners implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        PlayerData data = DataManager.getInstance().load(player);
+        PlayerData data = DataManager.getInstance().getPlayerData(player);
         data.setLoginTime(System.currentTimeMillis());
 
         PlayerLevelManager.getInstance().update(player);
@@ -24,7 +24,7 @@ public class PlayerGeneralListeners implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(PlayerQuitEvent event) {
-        DataManager.getInstance().save(event.getPlayer(), true);
+        DataManager.getInstance().savePlayerData(event.getPlayer(), true);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

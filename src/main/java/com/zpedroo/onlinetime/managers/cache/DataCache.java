@@ -9,8 +9,8 @@ import java.util.*;
 
 public class DataCache {
 
-    private Map<Player, PlayerData> playerData;
-    private List<ShopItem> shopItems;
+    private final Map<Player, PlayerData> playerData;
+    private final List<ShopItem> shopItems;
     private List<PlayerData> topOnline;
 
     public DataCache() {
